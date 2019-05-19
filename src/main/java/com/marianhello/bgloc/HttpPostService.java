@@ -55,8 +55,10 @@ public class HttpPostService {
 
     public int postJSON(JSONArray json, Map headers) throws IOException {
         String jsonString = "null";
-        if (json != null) {
-            jsonString = json.toString();
+        try {
+            jsonString = json.getJSONObject(0).toString();
+        } catch (Throwable e) {
+            Log.d(“Posting”, e.toString());
         }
 
         return postJSONString(jsonString, headers);
